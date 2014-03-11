@@ -24,7 +24,25 @@ fast C code included in this package.
   y <- SparseSignal(c(10L, 12L, 15L),
                     c(11L, 13L, 17L),
                     c( 1, -2,    4))
-  x + y
+  s <- x + y
+  print(s)
+  ## Visualize the two piecewise constant signals and their sums.
+  library(ggplot2)
+  library(grid)
+  all.signals <-
+    rbind(data.frame(x, what="x"),
+          data.frame(y, what="y"),
+          data.frame(s, what="sum"))
+  bases <- data.frame(position=1:20, base=rep(c("A","T","C","G"), l=20))
+  ggplot()+
+    geom_text(aes((first+after)/2-1/2, value, label=value,
+                  vjust=ifelse(value>0, 1, 0)), data=all.signals)+
+    geom_text(aes(position, 0, label=base), data=bases)+
+    geom_segment(aes(first-1/2, value, 
+                     xend=after-1/2, yend=value), data=all.signals)+
+    theme_bw()+
+    theme(panel.margin=unit(0,"cm"))+
+    facet_grid(what~.)
   ## you can also just add vectors, but they need to be length 1 or
   ## the number of segments.
   x + 1000
