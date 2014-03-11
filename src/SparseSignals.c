@@ -28,8 +28,8 @@ int add_SparseSignals(
 	    y_pos = x_pos + 1;
 	}
 	if(x_pos < last_x_pos || y_pos < last_y_pos){
-	    printf("should be x %d >= %d, y %d >= %d\n", 
-		   x_pos, last_x_pos, y_pos, last_y_pos);
+	    /* printf("should be x %d >= %d, y %d >= %d\n",  */
+	    /* 	   x_pos, last_x_pos, y_pos, last_y_pos); */
 	    return ERROR_POSITIONS_DECREASING;
 	}
 	last_y_pos = y_pos;
