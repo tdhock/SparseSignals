@@ -1,0 +1,32 @@
+* Motivation
+
+For piecewise constant signals with $M$ or $N$ segments defined on $1,
+..., L$, ($L >> M >= N$), arithmetic operations can be efficiently
+computed in $O(M + N)$ rather than $O(L)$ space and time, using the
+fast C code included in this package.
+
+#+BEGIN_SRC R
+  install.packages("devtools")
+  library(devtools)
+  install_github("SparseSignals", "tdhock")
+  library(SparseSignals)
+  ## adding two non-overlapping 1-segment signals gives a signal with
+  ## 2 segments.
+  x <- SparseSignal(1, 2, 5.5)
+  x + SparseSignal(4, 10, 3.8) # 2 rows.
+  ## subtracting a SparseSignal from itself gives an empty signal.
+  none <- x - x
+  str(none)
+  ## a more complicated example.
+  x <- SparseSignal(c(10L, 12L, 14L),
+                    c(11L, 13L, 16L),
+                    c(  1,   2,   3))
+  y <- SparseSignal(c(10L, 12L, 15L),
+                    c(11L, 13L, 17L),
+                    c( 1, -2,    4))
+  x + y
+  ## you can also just add vectors, but they need to be length 1 or
+  ## the number of segments.
+  x + 1000
+  x + c(1, 200, 3000)
+#+END_SRC
