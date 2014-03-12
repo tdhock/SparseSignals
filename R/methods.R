@@ -72,6 +72,6 @@ print.SparseSignal <- function(x, ...){
   if(nrow(x) > nrows){
     cat("...\n")
   }
-  x
+  invisible(x)
 }
 
