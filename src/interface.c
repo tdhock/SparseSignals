@@ -15,7 +15,7 @@ add_SparseSignals_interface
     double *y_value =    REAL(VECTOR_ELT(y, 2));
 
     int x_size = length(VECTOR_ELT(x, 0)), y_size = length(VECTOR_ELT(y, 0));
-    int z_size_max = x_size + y_size;
+    int z_size_max = (x_size + y_size)*2;
     int    *z_first = (int*)    R_alloc(z_size_max, sizeof(int));
     int    *z_after = (int*)    R_alloc(z_size_max, sizeof(int));
     double *z_value = (double*) R_alloc(z_size_max, sizeof(double));

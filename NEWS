@@ -3,6 +3,11 @@ TODO
 Vignette explaining when we get speedups vs just computing with a
 repetitive piecewise constant vector.
 
+2014.3.12
+
+in add_SparseSignals_interface, allocate let
+z_size_max=2*(x_size+y_size) instead of only x_size+y_size.
+
 2014.3.11
 
 S3 methods for printing, addition, and subtraction.
