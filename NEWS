@@ -5,6 +5,8 @@ repetitive piecewise constant vector.
 
 2014.3.12
 
+getVector for making a piecewise constant vector from a SparseSignal.
+
 return SparseSignal invisibly after printing.
 
 in add_SparseSignals_interface, allocate let

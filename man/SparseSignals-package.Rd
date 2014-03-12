@@ -10,7 +10,7 @@ be efficiently computed in O(M + N) rather than O(L) space and time.}
 \tabular{ll}{Package: \tab SparseSignals\cr
 Maintainer: \tab Toby Dylan Hocking <tdhock5@gmail.com>\cr
 Author: \tab Toby Dylan Hocking\cr
-Version: \tab 2014.3.11\cr
+Version: \tab 2014.3.12\cr
 License: \tab GPL-3\cr
 Title: \tab Efficient algorithms for sparse signals\cr
 Suggests: \tab testthat\cr}

@@ -75,3 +75,48 @@ print.SparseSignal <- function(x, ...){
   invisible(x)
 }
 
+### Get a piecewise constant vector from first up to but not including
+### after. This is inefficient and should be used only to compare
+### speed with efficient operations.
+getVector <- structure(function(ss, first, after){
+  first <- as.integer(first)
+  after <- as.integer(after)
+  stopifnot(length(first)==1)
+  stopifnot(length(after)==1)
+  size <- after-first
+  vec <- rep(NA, size)
+  not.useful <- ss$after <= first & ss$first >= after
+  useful <- ss[!not.useful,]
+  vec.i <- 1 #next position to write to.
+  ss.i <- first #next position in ss to read from.
+  for(seg.i in 1:nrow(useful)){
+    seg.first <- useful$first[seg.i]
+    if(seg.first > ss.i){
+      zero.size <- seg.first-ss.i
+      vec.i.end <- vec.i+zero.size-1
+      vec[vec.i:vec.i.end] <- 0
+      vec.i <- vec.i.end+1
+      ss.i <- seg.first
+    }
+    seg.after <- useful$after[seg.i]
+    seg.size <- seg.after-seg.first
+    vec.i.end <- vec.i+seg.size-1
+    vec[vec.i:vec.i.end] <- useful$value[seg.i]
+    vec.i <- vec.i.end+1
+    ss.i <- seg.after
+  }
+  if(vec.i <= length(vec)){
+    vec[vec.i:length(vec)] <- 0
+  }
+  vec
+}, ex=function(){
+  x <- SparseSignal(c(10, 15), c(13, 20), c(3.3, 5.5))
+  show <- function(first, after){
+    v <- getVector(x, first, after)
+    data.frame(v, i=first:(after-1))
+  }
+  show(5, 25)
+  show(10, 20)
+  show(10, 21)
+  show(9, 21)
+})
